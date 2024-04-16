@@ -17,23 +17,23 @@ public class RecursoController {
     private RecursoService recursoService;
 
     @GetMapping
-    public List<RecursoDTO> listarTodos(){
-        return recursoService.listarTodos();
+    public List<RecursoDTO> findAll(){
+        return recursoService.findAll();
     }
 
     @PostMapping
-    public void inserir(@RequestBody RecursoDTO recursoDTO){
-        recursoService.inserir(recursoDTO);
+    public void create(@RequestBody RecursoDTO recursoDTO){
+        recursoService.create(recursoDTO);
     }
 
     @PutMapping
-    public RecursoDTO alterar(@RequestBody RecursoDTO recursoDTO){
-        return recursoService.alterar(recursoDTO);
+    public RecursoDTO update(@RequestBody RecursoDTO recursoDTO){
+        return recursoService.update(recursoDTO);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> excluir(@PathVariable Long id){
-        recursoService.excluir(id);
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        recursoService.delete(id);
         return ResponseEntity.ok().build();
     }
 }

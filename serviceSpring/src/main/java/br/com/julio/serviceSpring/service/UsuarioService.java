@@ -5,7 +5,6 @@ import br.com.julio.serviceSpring.dto.UsuarioDTO;
 import br.com.julio.serviceSpring.entity.UsuarioEntity;
 import br.com.julio.serviceSpring.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
