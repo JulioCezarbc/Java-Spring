@@ -17,7 +17,6 @@ public class PerfilUsuarioController {
     @Autowired
     private PerfilUsuarioService perfilUsuarioService;
 
-
     @GetMapping
     public List<PerfilUsuarioDTO> findAll(){
         return perfilUsuarioService.findAll();
