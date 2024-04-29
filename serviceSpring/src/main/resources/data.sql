@@ -1,4 +1,4 @@
-INSERT INTO usuarios (nome, login, senha, email) VALUES ('julio', 'login','senha','julio@gmail.com');
+INSERT INTO usuarios (nome, login, senha, email, situacao) VALUES ('julio', 'login','senha','julio@gmail.com', 'ATIVO');
 
 INSERT INTO perfil (descricao) VALUES ('Adm');
 INSERT INTO perfil (descricao) VALUES ('Gerente');

@@ -1,6 +1,7 @@
 package br.com.julio.serviceSpring.dto;
 
 import br.com.julio.serviceSpring.entity.UsuarioEntity;
+import br.com.julio.serviceSpring.entity.enums.TipoSituacaoUsuario;
 import org.springframework.beans.BeanUtils;
 
 public class UsuarioDTO {
@@ -10,6 +11,7 @@ public class UsuarioDTO {
     private String login;
     private String senha;
     private String email;
+    private TipoSituacaoUsuario situacaoUsuario;
 
     public UsuarioDTO(){
     }
@@ -55,5 +57,13 @@ public class UsuarioDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public TipoSituacaoUsuario getSituacaoUsuario() {
+        return situacaoUsuario;
+    }
+
+    public void setSituacaoUsuario(TipoSituacaoUsuario situacaoUsuario) {
+        this.situacaoUsuario = situacaoUsuario;
     }
 }

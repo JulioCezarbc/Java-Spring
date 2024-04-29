@@ -1,6 +1,7 @@
 package br.com.julio.serviceSpring.entity;
 
 import br.com.julio.serviceSpring.dto.UsuarioDTO;
+import br.com.julio.serviceSpring.entity.enums.TipoSituacaoUsuario;
 import jakarta.persistence.*;
 import org.springframework.beans.BeanUtils;
 
@@ -23,6 +24,10 @@ public class UsuarioEntity {
 
     @Column(nullable = false)
     private String email;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private TipoSituacaoUsuario situacaoUsuario;
 
     public UsuarioEntity(){
     }
@@ -70,6 +75,13 @@ public class UsuarioEntity {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+    public TipoSituacaoUsuario getSituacaoUsuario() {
+        return situacaoUsuario;
+    }
+
+    public void setSituacaoUsuario(TipoSituacaoUsuario situacaoUsuario) {
+        this.situacaoUsuario = situacaoUsuario;
     }
 
     @Override
