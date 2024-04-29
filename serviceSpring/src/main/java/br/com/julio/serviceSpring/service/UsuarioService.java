@@ -3,6 +3,7 @@ package br.com.julio.serviceSpring.service;
 
 import br.com.julio.serviceSpring.dto.UsuarioDTO;
 import br.com.julio.serviceSpring.entity.UsuarioEntity;
+import br.com.julio.serviceSpring.entity.enums.TipoSituacaoUsuario;
 import br.com.julio.serviceSpring.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,6 +27,16 @@ public class UsuarioService {
         usuarioEntity.setSenha(passwordEncoder.encode(usuarioEntity.getSenha()));
         usuarioRepository.save(usuarioEntity);
     }
+
+    public void createNewUser(UsuarioDTO usuarioDTO){
+        UsuarioEntity usuarioEntity = new UsuarioEntity(usuarioDTO);
+        usuarioEntity.setSenha(passwordEncoder.encode(usuarioEntity.getSenha()));
+        usuarioEntity.setSituacaoUsuario(TipoSituacaoUsuario.PENDENTE);
+        usuarioEntity.setId(null);
+        usuarioRepository.save(usuarioEntity);
+
+    }
+
     public UsuarioDTO update(UsuarioDTO usuarioDTO){
         UsuarioEntity usuarioEntity = new UsuarioEntity(usuarioDTO);
         usuarioEntity.setSenha(passwordEncoder.encode(usuarioEntity.getSenha()));
