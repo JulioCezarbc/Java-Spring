@@ -18,6 +18,9 @@ public class UsuarioService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private EmailService emailService;
+
     public List<UsuarioDTO> findAll(){
         List<UsuarioEntity> usuarioEntities = usuarioRepository.findAll();
         return usuarioEntities.stream().map(UsuarioDTO::new).toList();
@@ -34,6 +37,9 @@ public class UsuarioService {
         usuarioEntity.setSituacaoUsuario(TipoSituacaoUsuario.PENDENTE);
         usuarioEntity.setId(null);
         usuarioRepository.save(usuarioEntity);
+
+        emailService.enviarEmailTexto(usuarioDTO.getEmail(), "Novo usuario cadastrado",
+                "Voce esta recebendo o email de cadastro");
 
     }
 
