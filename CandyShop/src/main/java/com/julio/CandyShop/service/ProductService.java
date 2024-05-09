@@ -1,6 +1,7 @@
 package com.julio.CandyShop.service;
 
 
+import com.julio.CandyShop.dto.ProductDTO;
 import com.julio.CandyShop.entity.ProductEntity;
 import com.julio.CandyShop.repository.ProductRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -16,27 +17,33 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    public List<ProductEntity> findAll(){
-        return productRepository.findAll();
+    public List<ProductDTO> findAll(){
+        List<ProductEntity> productEntities = productRepository.findAll();
+        return productEntities.stream().map(ProductDTO::new).toList();
     }
-    public ProductEntity findById(Long id){
-        Optional<ProductEntity> prod = productRepository.findById(id);
-        return prod.orElseThrow(() -> new EntityNotFoundException("Product with ID " + id + " not found"));
+    public ProductDTO findById(Long id){
+        Optional<ProductEntity> productOptional = productRepository.findById(id);
+        return productOptional
+                .map(ProductDTO::new)
+                .orElseThrow(() -> new EntityNotFoundException("Product with ID " + id + " not found"));
     }
-    public ProductEntity create (ProductEntity productEntity){
-        return productRepository.save(productEntity);
+    public ProductDTO create (ProductDTO ProductDTO){
+        ProductEntity product = new ProductEntity(ProductDTO);
+        ProductEntity savedProd = productRepository.save(product);
+        return new ProductDTO(savedProd);
     }
-    public ProductEntity update(Long id,ProductEntity productEntity){
+    public ProductDTO update(Long id,ProductDTO ProductDTO){
         ProductEntity product = productRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException
-                        ("Product not found with ID: " + productEntity.getId()));
+                        ("Product not found with ID: " + id));
 
-        product.setName(productEntity.getName());
-        product.setDescription(productEntity.getDescription());
-        product.setPrice(productEntity.getPrice());
-        product.setQuantity(productEntity.getQuantity());
+        product.setName(ProductDTO.getName());
+        product.setDescription(ProductDTO.getDescription());
+        product.setPrice(ProductDTO.getPrice());
+        product.setQuantity(ProductDTO.getQuantity());
 
-        return productRepository.save(product);
+        ProductEntity savedProd = productRepository.save(product);
+        return new ProductDTO(savedProd);
     }
     public void delete(Long id){
         ProductEntity product = productRepository.findById(id).get();

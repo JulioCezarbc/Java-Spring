@@ -1,5 +1,6 @@
 package com.julio.CandyShop.controller;
 
+import com.julio.CandyShop.dto.ProductDTO;
 import com.julio.CandyShop.entity.ProductEntity;
 import com.julio.CandyShop.entity.UserEntity;
 import com.julio.CandyShop.service.ProductService;
@@ -20,26 +21,26 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping
-    public ResponseEntity<List<ProductEntity>> findAll(){
-        List<ProductEntity> list = productService.findAll();
+    public ResponseEntity<List<ProductDTO>> findAll(){
+        List<ProductDTO> list = productService.findAll();
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<ProductEntity> findById(@PathVariable Long id){
-        ProductEntity prod = productService.findById(id);
+    public ResponseEntity<ProductDTO> findById(@PathVariable Long id){
+        ProductDTO prod = productService.findById(id);
         return ResponseEntity.ok().body(prod);
     }
 
     @PostMapping
-    public ResponseEntity<ProductEntity> create(@RequestBody ProductEntity product){
+    public ResponseEntity<ProductDTO> create(@RequestBody ProductDTO product){
         product = productService.create(product);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(product.getId())
                 .toUri();
         return ResponseEntity.created(uri).body(product);
     }
     @PutMapping(value = "/{id}")
-    public ResponseEntity<ProductEntity> update(@PathVariable Long id, @RequestBody ProductEntity product ){
+    public ResponseEntity<ProductDTO> update(@PathVariable Long id, @RequestBody ProductDTO product ){
         product = productService.update(id,product);
         return ResponseEntity.ok().body(product);
     }

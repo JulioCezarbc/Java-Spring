@@ -1,7 +1,9 @@
 package com.julio.CandyShop.entity;
 
+import com.julio.CandyShop.dto.ProductDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
+import org.springframework.beans.BeanUtils;
 
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -9,7 +11,6 @@ import java.util.Objects;
 @Entity
 @Table(name = "product")
 public class ProductEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,13 +23,16 @@ public class ProductEntity {
     @Size(min = 3, max = 120)
     private String description;
 
-    @Column(nullable = false)
+    @Column(name = "price", nullable = false)
     private BigDecimal price;
 
     @Column(nullable = false)
     private Integer quantity;
 
     public ProductEntity(){
+    }
+    public ProductEntity(ProductDTO ProductDTO){
+        BeanUtils.copyProperties(ProductDTO, this);
     }
     public Long getId() {
         return id;

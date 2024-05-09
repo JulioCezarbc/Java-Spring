@@ -1,8 +1,10 @@
 package com.julio.CandyShop.entity;
 
 
+import com.julio.CandyShop.dto.UserDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
+import org.springframework.beans.BeanUtils;
 
 import java.util.Objects;
 
@@ -20,6 +22,11 @@ public class UserEntity {
     private String address;
     public UserEntity(){
     }
+
+    public UserEntity(UserDTO UserDTO){
+        BeanUtils.copyProperties(UserDTO, this);
+    }
+
     public Long getId() {
         return id;
     }

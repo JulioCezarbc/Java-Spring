@@ -1,9 +1,9 @@
 package com.julio.CandyShop.service;
 
+import com.julio.CandyShop.dto.UserDTO;
 import com.julio.CandyShop.entity.UserEntity;
 import com.julio.CandyShop.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,26 +16,31 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<UserEntity> findAll(){
-        return userRepository.findAll();
+    public List<UserDTO> findAll(){
+        List<UserEntity> userEntities = userRepository.findAll();
+        return userEntities.stream().map(UserDTO::new).toList();
     }
 
-    public UserEntity findById(Long id){
+    public UserDTO findById(Long id){
         Optional<UserEntity> user = userRepository.findById(id);
-        return user.orElseThrow(() -> new EntityNotFoundException("User with ID " + id + " not found"));
+        return user.map(UserDTO::new).orElseThrow(() -> new EntityNotFoundException("User with ID " + id + " not found"));
     }
 
-    public UserEntity create (UserEntity user){
-        return userRepository.save(user);
+    public UserDTO create (UserDTO user){
+        UserEntity userEntity = new UserEntity(user);
+        UserEntity savedUser = userRepository.save(userEntity);
+        return new UserDTO(savedUser);
     }
 
-    public UserEntity update(Long id,UserEntity user){
-        UserEntity user1 = userRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("User with ID " + user.getId() + " not found"));
+    public UserDTO update(Long id,UserDTO userDTO){
+        UserEntity user = userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User with ID " + id + " not found"));
 
-    user1.setName(user.getName());
-    user1.setAddress(user.getAddress());
-    return userRepository.save(user1);
+    user.setName(userDTO.getName());
+    user.setAddress(userDTO.getAddress());
+
+    UserEntity savedUser = userRepository.save(user);
+    return new UserDTO(savedUser);
     }
     public void delete (Long id){
         UserEntity user = userRepository.findById(id).get();
