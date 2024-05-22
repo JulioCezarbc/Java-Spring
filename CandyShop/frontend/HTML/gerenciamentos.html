@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/CSS/gerenciamentos.css">
+    <title>Gerenciamentos De Produtos</title>
+</head>
+<body>
+    
+    <header>
+        <nav>
+            <a href="/HTML/gerenciamentos.html"><strong>Listagem De Produtos</strong></a>
+
+            <ul>
+                <a href="/HTML/index.html">Candy</a> 
+                <a href="">Relatorios</a>
+                <a href="">Atualizações</a>
+            </ul>
+        </nav>
+    </header>
+
+
+    <main>
+        <div>
+            <h1>Produtos</h1>
+            <table id="product-table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Preço</th>
+                        <th>Quantidade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+            <div class="pagination">
+                <button id="prevPage" disabled>Anterior</button>
+                <span id="pageNumber">1</span>
+                <button id="nextPage">Próximo</button>
+            </div>
+        </div>
+
+
+
+
+        <div>
+            <h2>Adicionar Produto</h2>
+            <form id="product-form">
+                <input type="text" id="name" placeholder="Nome do Produto" required>
+                <input type="text" id="description" placeholder="Descrição" required>
+                <input type="number" id="price" placeholder="Preço" required>
+                <input type="number" id="quantity" placeholder="Quantidade" required>
+                <button type="submit">Adicionar Produto</button>
+
+            </form>
+        </div>
+
+
+    </main>
+
+
+    <script src="/JS/gerenciamentos.js"></script>
+
+</body>
+</html>
