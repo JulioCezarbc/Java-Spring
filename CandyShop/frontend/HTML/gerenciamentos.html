@@ -14,7 +14,7 @@
 
             <ul>
                 <a href="/HTML/index.html">Candy</a> 
-                <a href="">Relatorios</a>
+                <a href="/HTML/relatorios.html">Relatorios</a>
                 <a href="">Atualizações</a>
             </ul>
         </nav>
@@ -22,11 +22,13 @@
 
 
     <main>
-        <div>
+        <div >
             <h1>Produtos</h1>
             <table id="product-table">
                 <thead>
                     <tr>
+                        <th class="checkbox-column"><input type="checkbox" id="selectAllCheckbox"></th>
+
                         <th>Nome</th>
                         <th>Descrição</th>
                         <th>Preço</th>
@@ -37,6 +39,9 @@
                     
                 </tbody>
             </table>
+            <button id="atualizationSelected">Atualizar</button>
+            <button id="deleteSelected">Excluir Selecionados</button>
+
             <div class="pagination">
                 <button id="prevPage" disabled>Anterior</button>
                 <span id="pageNumber">1</span>
@@ -60,6 +65,21 @@
         </div>
 
 
+
+        <div id="updateModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Atualizar Produto</h2>
+                <form id="update-form">
+                    <input type="text" id="update-name" placeholder="Novo Nome do Produto" required>
+                    <input type="text" id="update-description" placeholder="Nova Descrição" required>
+                    <input type="number" id="update-price" placeholder="Novo Preço" required>
+                    <input type="number" id="update-quantity" placeholder="Nova Quantidade" required>
+                    <button type="submit">Atualizar</button>
+                </form>
+            </div>
+        </div>
+        
     </main>
 
 

@@ -5,13 +5,13 @@
 
 body{
     background-color: #f0f0f0c9;
-    font-size: 16px;
+    font-size: 15px;
 }
 
 header{
     background-color: #007bff;
     color: #fff;
-    padding: 3rem;
+    padding: 2.2rem;
     border-radius: 15px;
 }
 header strong{
@@ -45,6 +45,7 @@ nav ul{
 nav ul a{
     margin-left: 2rem;
     font-weight: bold;
+    font-size: 19px;
 }
 
 h1,h2{
@@ -56,34 +57,21 @@ h1,h2{
 table {
     width: 80%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin-bottom: 20px;
     margin: 20px auto;
-    table-layout: fixed;
+}
+th, td {
+    padding: 8px;
+    text-align: left;
+
 }
 table, th, td {
     border: 1px solid #007bff;
 }
-th, td {
-    padding: 12px;
-    text-align: left;
-}
-
 th {
     background-color: #007bff;
     color: #fff;
-}
-
-
-#product-table tbody {
-    display: block;
-    height: 220px;
-    overflow-y: auto;
-}
-
-#product-table thead, #product-table tbody tr {
-    display: table;
-    width: 100%;
-    table-layout: fixed;
+    text-align: left;
 }
 
 form {
@@ -101,10 +89,47 @@ textarea {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    /*margin-right: 80%;*/
     width: 100%;
-    
 }
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    
+
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    border: 2px solid #000;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 
 button {
     padding: 10px;
@@ -115,8 +140,6 @@ button {
     cursor: pointer;
     top: 1px;
     transition: background-color 0.6s ease; 
-    
-
 }
 button:hover{
     background-color: #007bffa8;
@@ -125,7 +148,7 @@ button:hover{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin-top: -35px;
 }
 
 .pagination button {
@@ -150,4 +173,11 @@ button:hover{
 .pagination span {
     margin: 0 10px;
     font-size: 18px;
+}
+
+#deleteSelected{
+    margin-left: 68%;
+}
+#atualizationSelected{
+    margin-left: 10%;
 }
