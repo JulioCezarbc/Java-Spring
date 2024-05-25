@@ -23,11 +23,11 @@ public class ProductEntity {
     @Size(min = 3, max = 120)
     private String description;
 
-    @Column(name = "price", nullable = false)
-    private BigDecimal price;
-
     @Column(nullable = false)
     private Integer quantity;
+
+    @Column(name = "price", nullable = false)
+    private BigDecimal price;
 
     public ProductEntity(){
     }
@@ -64,6 +64,7 @@ public class ProductEntity {
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -75,4 +76,6 @@ public class ProductEntity {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+
 }

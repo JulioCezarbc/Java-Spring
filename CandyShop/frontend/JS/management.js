@@ -40,8 +40,8 @@ function renderTable() {
             <td><input type="checkbox" class="delete-checkbox" data-id="${product.id}"></td>
             <td>${product.name}</td>
             <td>${product.description}</td>
-            <td>${product.price}</td>
             <td>${product.quantity}</td>
+            <td>${product.price}</td>
         `;
         tableBody.appendChild(row);
     });
@@ -117,11 +117,12 @@ function deleteSelectedProducts() {
             if (!response.ok) {
                 throw new Error('Erro na resposta da rede.');
             }
+    
             products = products.filter(product => product.id !== id);
             const totalProducts = products.length;
             const totalPages = Math.ceil(totalProducts / rowsPerPage);
-            currentPage = Math.min(currentPage, totalPages); // Mantém a página atual se possível
-            renderTable();
+            currentPage = Math.min(currentPage, totalPages); 
+            renderTable();            
         })
         .catch(error => console.error('Erro ao excluir produto: ', error));
     });
@@ -144,8 +145,8 @@ function openUpdateModal(product) {
 
     document.getElementById('update-name').value = product.name;
     document.getElementById('update-description').value = product.description;
-    document.getElementById('update-price').value = product.price;
     document.getElementById('update-quantity').value = product.quantity;
+    document.getElementById('update-price').value = product.price;
 
     idToUpdate = product.id;
 }
@@ -162,8 +163,9 @@ function updateSelectedProduct(event) {
 
     const name = document.getElementById('update-name').value;
     const description = document.getElementById('update-description').value;
-    const price = document.getElementById('update-price').value;
     const quantity = document.getElementById('update-quantity').value;
+    const price = document.getElementById('update-price').value;
+
 
     const updatedProduct = { name, description, price, quantity };
 

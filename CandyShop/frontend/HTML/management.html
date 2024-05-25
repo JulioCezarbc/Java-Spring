@@ -3,19 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/CSS/gerenciamentos.css">
+    <link rel="stylesheet" href="/CSS/management.css">
     <title>Gerenciamentos De Produtos</title>
 </head>
 <body>
     
     <header>
         <nav>
-            <a href="/HTML/gerenciamentos.html"><strong>Listagem De Produtos</strong></a>
+            <a href="/HTML/management.html"><strong>Listagem De Produtos</strong></a>
 
             <ul>
                 <a href="/HTML/index.html">Candy</a> 
-                <a href="/HTML/relatorios.html">Relatorios</a>
-                <a href="">Atualizações</a>
+                <a href="/HTML/user.html">Clientes</a>
             </ul>
         </nav>
     </header>
@@ -31,8 +30,9 @@
 
                         <th>Nome</th>
                         <th>Descrição</th>
-                        <th>Preço</th>
                         <th>Quantidade</th>
+                        <th>Preço Total</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -40,7 +40,7 @@
                 </tbody>
             </table>
             <button id="atualizationSelected">Atualizar</button>
-            <button id="deleteSelected">Excluir Selecionados</button>
+            <button id="deleteSelected">Excluir</button>
 
             <div class="pagination">
                 <button id="prevPage" disabled>Anterior</button>
@@ -57,8 +57,9 @@
             <form id="product-form">
                 <input type="text" id="name" placeholder="Nome do Produto" required>
                 <input type="text" id="description" placeholder="Descrição" required>
-                <input type="number" id="price" placeholder="Preço" required>
                 <input type="number" id="quantity" placeholder="Quantidade" required>
+                <input type="number" id="price" placeholder="Preço" required>
+
                 <button type="submit">Adicionar Produto</button>
 
             </form>
@@ -73,8 +74,8 @@
                 <form id="update-form">
                     <input type="text" id="update-name" placeholder="Novo Nome do Produto" required>
                     <input type="text" id="update-description" placeholder="Nova Descrição" required>
-                    <input type="number" id="update-price" placeholder="Novo Preço" required>
                     <input type="number" id="update-quantity" placeholder="Nova Quantidade" required>
+                    <input type="number" id="update-price" placeholder="Novo Preço" required>
                     <button type="submit">Atualizar</button>
                 </form>
             </div>
@@ -83,7 +84,7 @@
     </main>
 
 
-    <script src="/JS/gerenciamentos.js"></script>
+    <script src="/JS/management.js"></script>
 
 </body>
 </html>

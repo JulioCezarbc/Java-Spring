@@ -14,10 +14,11 @@ public class ProductDTO {
 
     private String description;
 
+    private Integer quantity;
 
     private BigDecimal price;
+    private BigDecimal totalPrice;
 
-    private Integer quantity;
 
     public ProductDTO(){
     }
@@ -63,5 +64,13 @@ public class ProductDTO {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }
