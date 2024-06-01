@@ -1,8 +1,6 @@
 package com.julio.CandyShop.controller;
 
 import com.julio.CandyShop.dto.ProductDTO;
-import com.julio.CandyShop.entity.ProductEntity;
-import com.julio.CandyShop.entity.UserEntity;
 import com.julio.CandyShop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

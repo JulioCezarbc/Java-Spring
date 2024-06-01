@@ -4,25 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/CSS/user.css">
-    <title>Relatorios</title>
+    <title>Gerenciamento De Clientes</title>
 </head>
 <body>
     <header>
         <nav>
             <a href=""><strong>Clientes</strong></a>
-
-        <ul>
-            <a href="/HTML/index.html">Candy</a>
-            <a href="/HTML/management.html">Gerenciamentos</a>
-        </ul>
-
+            <ul>
+                <li><a href="/HTML/index.html">Candy</a></li>
+                <li><a href="/HTML/management.html">Produtos</a>
+            </ul>
         </nav>
     </header>
-
     <main>
-
-        
+        <section class="form">
+            <strong>Adicionar Clientes</strong>
+            <form id="client-form">
+                <div class="campo">
+                    <label for="name">Nome do Cliente:</label>
+                    <input type="text" id="name" class="cent" placeholder="Nome" required>
+                </div>
+                <div class="campo">
+                    <label for="number">Número do Cliente:</label>
+                    <input type="text" id="number" class="cent" placeholder="Numero De Celular" required>
+                </div>
+                <button type="submit" id="btn">Adicionar Cliente</button>
+            </form>
+        </section>
+        <section class="imagem">
+            <img src="/img/6009864.png" alt="Imagem Descritiva" class="main-image">
+        </section>
+        <section id="table">
+            <strong>Clientes</strong>
+            <table id="client-table">
+                <thead>
+                    <tr>
+                        <th class="checkbox-column"><input type="checkbox" id="selectAllCheckbox"></th>
+                        <th>Nome</th>
+                        <th>Numero</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <button id="atualizationSelected">Atualizar</button>
+            <button id="deleteSelected">Excluir</button>
+            <section class="pagination">
+                <button id="prevPage" disabled>Anterior</button>
+                <span id="pageNumber">1</span>
+                <button id="nextPage">Próximo</button>
+            </section>
+        </section>
+        <section id="updateModal" class="modal">
+            <section class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Atualizar Cliente</h2>
+                <form id="update-form">
+                    <input type="text" id="update-name" placeholder="Novo Nome" required>
+                    <input type="text" id="update-number" placeholder="Novo Numero" required>
+                    <button type="submit">Atualizar</button>
+                </form>
+            </section>
+        </section>
     </main>
-
+    
+    <script src="/JS/client.js"></script>
 </body>
 </html>

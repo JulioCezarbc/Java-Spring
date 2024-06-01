@@ -1,7 +1,7 @@
 package com.julio.CandyShop.entity;
 
 
-import com.julio.CandyShop.dto.UserDTO;
+import com.julio.CandyShop.dto.ClientDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import org.springframework.beans.BeanUtils;
@@ -9,8 +9,8 @@ import org.springframework.beans.BeanUtils;
 import java.util.Objects;
 
 @Entity
-@Table(name = "users")
-public class UserEntity {
+@Table(name = "client")
+public class ClientEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,13 +18,13 @@ public class UserEntity {
     @Size(min = 3, max = 60)
     private String name;
     @Column(nullable = false)
-    @Size(min = 3, max = 100)
-    private String address;
-    public UserEntity(){
+    @Size(min = 3, max = 12)
+    private String number;
+    public ClientEntity(){
     }
 
-    public UserEntity(UserDTO UserDTO){
-        BeanUtils.copyProperties(UserDTO, this);
+    public ClientEntity(ClientDTO ClientDTO){
+        BeanUtils.copyProperties(ClientDTO, this);
     }
 
     public Long getId() {
@@ -39,17 +39,20 @@ public class UserEntity {
     public void setName(String name) {
         this.name = name;
     }
-    public String getAddress() {
-        return address;
+
+    public @Size(min = 3, max = 12) String getNumber() {
+        return number;
     }
-    public void setAddress(String address) {
-        this.address = address;
+
+    public void setNumber(@Size(min = 3, max = 12) String number) {
+        this.number = number;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserEntity that = (UserEntity) o;
+        ClientEntity that = (ClientEntity) o;
         return Objects.equals(id, that.id);
     }
     @Override

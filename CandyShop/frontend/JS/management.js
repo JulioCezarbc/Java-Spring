@@ -10,7 +10,7 @@ document.getElementById('selectAllCheckbox').addEventListener('click', toggleSel
 document.getElementById('atualizationSelected').addEventListener('click', () => {
     const selectedCheckboxes = document.querySelectorAll('.delete-checkbox:checked');
     if (selectedCheckboxes.length !== 1) {
-        alert('Selecione exatamente um produto para atualizar.');
+        alert('Selecione apenas um produto para atualizar.');
         return;
     }
     const id = selectedCheckboxes[0].getAttribute('data-id');

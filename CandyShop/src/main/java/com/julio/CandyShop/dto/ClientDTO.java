@@ -1,17 +1,17 @@
 package com.julio.CandyShop.dto;
 
-import com.julio.CandyShop.entity.UserEntity;
+import com.julio.CandyShop.entity.ClientEntity;
 import org.springframework.beans.BeanUtils;
 
-public class UserDTO {
+public class ClientDTO {
 
     private Long id;
     private String name;
-    private String address;
-    public UserDTO(){
+    private String number;
+    public ClientDTO(){
     }
-    public UserDTO(UserEntity UserEntity){
-        BeanUtils.copyProperties(UserEntity, this);
+    public ClientDTO(ClientEntity ClientEntity){
+        BeanUtils.copyProperties(ClientEntity, this);
     }
 
     public Long getId() {
@@ -30,11 +30,11 @@ public class UserDTO {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
+    public String getNumber() {
+        return number;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setNumber(String number) {
+        this.number = number;
     }
 }
