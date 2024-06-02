@@ -3,7 +3,8 @@ package com.julio.CandyShop.service;
 import com.julio.CandyShop.dto.ClientDTO;
 import com.julio.CandyShop.entity.ClientEntity;
 import com.julio.CandyShop.repository.ClientRepository;
-import jakarta.persistence.EntityNotFoundException;
+
+import com.julio.CandyShop.service.exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

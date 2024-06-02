@@ -4,7 +4,8 @@ package com.julio.CandyShop.service;
 import com.julio.CandyShop.dto.ProductDTO;
 import com.julio.CandyShop.entity.ProductEntity;
 import com.julio.CandyShop.repository.ProductRepository;
-import jakarta.persistence.EntityNotFoundException;
+
+import com.julio.CandyShop.service.exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +35,7 @@ public class ProductService {
     public ProductDTO update(Long id,ProductDTO ProductDTO){
         ProductEntity product = productRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException
-                        ("Product not found with ID: " + id));
+                        ("Product with ID " + id + " not found"));
 
         product.setName(ProductDTO.getName());
         product.setDescription(ProductDTO.getDescription());

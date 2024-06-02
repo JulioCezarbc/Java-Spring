@@ -17,7 +17,6 @@ public class ProductDTO {
     private Integer quantity;
 
     private BigDecimal price;
-    private BigDecimal totalPrice;
 
 
     public ProductDTO(){
@@ -66,11 +65,4 @@ public class ProductDTO {
         this.quantity = quantity;
     }
 
-    public BigDecimal getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
-    }
 }
