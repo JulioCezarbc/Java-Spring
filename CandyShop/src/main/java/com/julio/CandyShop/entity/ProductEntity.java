@@ -1,11 +1,13 @@
 package com.julio.CandyShop.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.julio.CandyShop.dto.ProductDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import org.springframework.beans.BeanUtils;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -28,6 +30,7 @@ public class ProductEntity {
 
     @Column(name = "price", nullable = false)
     private BigDecimal price;
+
 
     public ProductEntity(){
     }
@@ -76,6 +79,4 @@ public class ProductEntity {
     public int hashCode() {
         return Objects.hash(id);
     }
-
-
 }

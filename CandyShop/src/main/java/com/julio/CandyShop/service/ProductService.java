@@ -6,6 +6,7 @@ import com.julio.CandyShop.entity.ProductEntity;
 import com.julio.CandyShop.repository.ProductRepository;
 
 import com.julio.CandyShop.service.exceptions.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,11 +28,13 @@ public class ProductService {
                 .map(ProductDTO::new)
                 .orElseThrow(() -> new EntityNotFoundException("Product with ID " + id + " not found"));
     }
+    @Transactional
     public ProductDTO create (ProductDTO ProductDTO){
         ProductEntity product = new ProductEntity(ProductDTO);
         ProductEntity savedProd = productRepository.save(product);
         return new ProductDTO(savedProd);
     }
+    @Transactional
     public ProductDTO update(Long id,ProductDTO ProductDTO){
         ProductEntity product = productRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException
@@ -45,6 +48,7 @@ public class ProductService {
         ProductEntity savedProd = productRepository.save(product);
         return new ProductDTO(savedProd);
     }
+    @Transactional
     public void delete(Long id){
         ProductEntity product = productRepository.findById(id).get();
         productRepository.delete(product);

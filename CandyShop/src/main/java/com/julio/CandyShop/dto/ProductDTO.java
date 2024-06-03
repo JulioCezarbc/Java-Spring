@@ -5,6 +5,7 @@ import com.julio.CandyShop.entity.ProductEntity;
 import org.springframework.beans.BeanUtils;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class ProductDTO {
 
@@ -18,8 +19,15 @@ public class ProductDTO {
 
     private BigDecimal price;
 
-
     public ProductDTO(){
+    }
+
+    public ProductDTO(Long id, String name, String description, Integer quantity, BigDecimal price) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.quantity = quantity;
+        this.price = price;
     }
 
     public ProductDTO(ProductEntity ProductEntity){

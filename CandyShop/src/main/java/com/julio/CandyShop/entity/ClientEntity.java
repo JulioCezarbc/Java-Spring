@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import org.springframework.beans.BeanUtils;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -20,11 +21,15 @@ public class ClientEntity {
     @Column(nullable = false)
     @Size(min = 3, max = 12)
     private String number;
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<PurchaseEntity> historyPurchase;
+
     public ClientEntity(){
     }
 
-    public ClientEntity(ClientDTO ClientDTO){
-        BeanUtils.copyProperties(ClientDTO, this);
+    public ClientEntity(ClientDTO clientDTO){
+        BeanUtils.copyProperties(clientDTO, this);
     }
 
     public Long getId() {
@@ -46,6 +51,10 @@ public class ClientEntity {
 
     public void setNumber(@Size(min = 3, max = 12) String number) {
         this.number = number;
+    }
+
+    public List<PurchaseEntity> getHistoryPurchase() {
+        return historyPurchase;
     }
 
     @Override
