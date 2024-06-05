@@ -38,7 +38,11 @@ public class PurchaseController {
                 .toUri();
         return ResponseEntity.created(uri).body(purchase);
     }
-
+    @GetMapping(value = "/client/{clientId}")
+    public ResponseEntity<List<PurchaseDTO>> findByClientId(@PathVariable Long clientId) {
+        List<PurchaseDTO> purchases = purchaseService.findByClientId(clientId);
+        return ResponseEntity.ok().body(purchases);
+    }
     @PutMapping(value = "/{id}")
     public ResponseEntity<PurchaseDTO> update(@PathVariable Long id, @RequestBody PurchaseDTO purchase ){
         purchase = purchaseService.update(id,purchase);

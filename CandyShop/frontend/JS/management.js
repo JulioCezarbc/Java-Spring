@@ -25,6 +25,9 @@ document.querySelector('.close').addEventListener('click', closeUpdateModal);
 document.getElementById('update-form').addEventListener('submit', updateSelectedProduct);
 document.addEventListener('DOMContentLoaded', loadProducts);
 
+function formatCurrency(amount) {
+    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(amount);
+}
 
 function renderTable() {
     const tableBody = document.querySelector('#product-table tbody');
@@ -36,12 +39,14 @@ function renderTable() {
 
     paginatedProducts.forEach(product => {
         const row = document.createElement('tr');
+        const totalPrice = product.price * product.quantity; // Calcula o preço total
         row.innerHTML = `
             <td><input type="checkbox" class="delete-checkbox" data-id="${product.id}"></td>
             <td>${product.name}</td>
             <td>${product.description}</td>
             <td>${product.quantity}</td>
-            <td>${product.price}</td>
+            <td>${formatCurrency(product.price)}</td>
+            <td>${formatCurrency(totalPrice)}</td>
         `;
         tableBody.appendChild(row);
     });
@@ -49,7 +54,7 @@ function renderTable() {
     for (let i = paginatedProducts.length; i < rowsPerPage; i++) {
         const emptyRow = document.createElement('tr');
         emptyRow.innerHTML = `
-            <td colspan="5" style="height: 48px;"></td>
+            <td colspan="6" style="height: 48px;"></td>
         `;
         tableBody.appendChild(emptyRow);
     }
@@ -58,6 +63,7 @@ function renderTable() {
     document.getElementById('nextPage').disabled = end >= products.length;
     document.getElementById('pageNumber').textContent = currentPage;
 }
+
 
 function loadProducts() {
     fetch(API_URL)
@@ -122,7 +128,7 @@ function deleteSelectedProducts() {
             const totalProducts = products.length;
             const totalPages = Math.ceil(totalProducts / rowsPerPage);
             currentPage = Math.min(currentPage, totalPages); 
-            renderTable();            
+            loadProducts();            
         })
         .catch(error => console.error('Erro ao excluir produto: ', error));
     });
@@ -143,10 +149,6 @@ function openUpdateModal(product) {
 
 
 
-    document.getElementById('update-name').value = product.name;
-    document.getElementById('update-description').value = product.description;
-    document.getElementById('update-quantity').value = product.quantity;
-    document.getElementById('update-price').value = product.price;
 
     idToUpdate = product.id;
 }
@@ -158,6 +160,7 @@ function closeUpdateModal() {
 
 function updateSelectedProduct(event) {
     event.preventDefault();
+    
 
     if (!idToUpdate) return;
 

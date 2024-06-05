@@ -3,7 +3,7 @@ package com.julio.CandyShop.service;
 import com.julio.CandyShop.dto.ClientDTO;
 import com.julio.CandyShop.entity.ClientEntity;
 import com.julio.CandyShop.repository.ClientRepository;
-
+import com.julio.CandyShop.service.exceptions.EntityExistsException;
 import com.julio.CandyShop.service.exceptions.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +30,22 @@ public class ClientService {
 
     @Transactional
     public ClientDTO create (ClientDTO client){
+
+        if (clientRepository.existsByNumber(client.getNumber())) {
+            throw new EntityExistsException("Número de telefone já existe.");
+        }
+
         ClientEntity clientEntity = new ClientEntity(client);
         ClientEntity savedClient = clientRepository.save(clientEntity);
         return new ClientDTO(savedClient);
     }
     @Transactional
     public ClientDTO update(Long id,ClientDTO clientDTO){
+
+        if (clientRepository.existsByNumber(clientDTO.getNumber())) {
+            throw new EntityExistsException("Número de telefone já existe.");
+        }
+
         ClientEntity client = clientRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Client with ID " + id + " not found"));
 

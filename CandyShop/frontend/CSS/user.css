@@ -56,6 +56,7 @@ section {
     border-radius: 5%;
     padding: 20px;
     height: 35%;
+    margin-top: 40px;
 }
 .form strong{
     font-size: 25px;
@@ -114,35 +115,23 @@ button:hover {
         width: 90%;
     }
 }
-.imagem {
-    text-align: center;
-}
-.imagem img {
-    width: 100%;
-    max-height: 350px;
-    margin-bottom: 20px;
-}
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-th, td {
-    padding: 8px;
-    border: 1px solid #ccc;
-    text-align: left;
-}
-th {
-    background-color: #f0f0f0;
-}
 table {
     width: 80%;
     border-collapse: collapse;
     margin: 20px auto;
 }
+
+th, td {
+    padding: 6px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
 th {
     background-color: #007bff;
     color: #fff;
 }
+
 #table strong {
     display: flex;
     text-align: center;
@@ -150,6 +139,10 @@ th {
 }
 #atualizationSelected{
     margin-left: 10%;
+}
+#prevPage{
+    margin-left: 22%;
+
 }
 input[type="text"],
 textarea {

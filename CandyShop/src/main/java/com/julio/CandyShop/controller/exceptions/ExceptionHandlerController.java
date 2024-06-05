@@ -2,8 +2,8 @@ package com.julio.CandyShop.controller.exceptions;
 
 
 import com.julio.CandyShop.service.exceptions.EntityNotFoundException;
+import jakarta.persistence.EntityExistsException;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
 
 @ControllerAdvice
 public class ExceptionHandlerController {
@@ -51,5 +49,16 @@ public class ExceptionHandlerController {
         error.setMessage("JSON parse error: " + ex.getMessage());
         error.setPath(request.getRequestURI());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
+    @ExceptionHandler(EntityExistsException.class)
+    public ResponseEntity<StandardError> handleEntityExistsException(EntityExistsException ex, HttpServletRequest request) {
+        StandardError error = new StandardError();
+        error.setTimestamp(Instant.now());
+        error.setStatus(HttpStatus.CONFLICT.value());
+        error.setError("Conflict");
+        error.setMessage(ex.getMessage());
+        error.setPath(request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
 }

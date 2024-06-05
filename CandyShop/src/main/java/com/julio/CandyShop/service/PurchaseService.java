@@ -39,6 +39,13 @@ public class PurchaseService {
                 .map(PurchaseDTO::new)
                 .orElseThrow(() -> new EntityNotFoundException("Purchase with ID " + id + " not found"));
     }
+    @Transactional
+    public List<PurchaseDTO> findByClientId(Long clientId) {
+        ClientEntity client = clientRepository.findById(clientId)
+                .orElseThrow(() -> new EntityNotFoundException("Client with ID " + clientId + " not found"));
+        List<PurchaseEntity> purchases = purchaseRepository.findByClient(client);
+        return purchases.stream().map(PurchaseDTO::new).collect(Collectors.toList());
+    }
 
     @Transactional
     public PurchaseDTO create(PurchaseDTO purchaseDTO) {

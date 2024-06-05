@@ -10,7 +10,7 @@ document.getElementById('selectAllCheckbox').addEventListener('click', toggleSel
 document.getElementById('atualizationSelected').addEventListener('click', () => {
     const selectedCheckboxes = document.querySelectorAll('.delete-checkbox:checked');
     if(selectedCheckboxes.length !== 1){
-        alert ('Selecione apenas um cliente para atualizar.');
+        alert ('Selecione um cliente para atualizar.');
         return;
     }
     const id = selectedCheckboxes[0].getAttribute('data-id');
@@ -79,6 +79,19 @@ function addClient(event){
 
     const name = document.getElementById('name').value;
     const number = document.getElementById('number').value;
+    if (!isValidName(name)) {
+        alert("O nome não pode conter números ou símbolos.");
+        return;
+    }
+
+    if (!isValidPhoneNumber(number)) {
+        alert("Número de celular inválido. O número não deve conter letras.");
+        return;
+    }
+    if (isPhoneNumberDuplicate(number)) {
+        alert("Número de celular duplicado. Insira um número diferente.");
+        return;
+    }
     const client = { name, number };
 
     fetch(API_URL, {
@@ -116,7 +129,7 @@ function deleteSelectedClients(){
             const totalClients = clients.length;
             const totalPages = Math.ceil(totalClients / rowsPerPage);
             currentPage = Math.min(currentPage, totalPages);
-            renderTable();
+            loadClients();
         })
         .catch(error => console.error('Erro ao excluir cliente: ', error));
     });
@@ -188,3 +201,17 @@ document.getElementById('prevPage').addEventListener('click', () => {
         renderTable();
     }
 });
+
+function isValidName(name) {
+    const nameRegex = /^[a-zA-Z\s]+$/;
+    return nameRegex.test(name);
+}
+
+function isValidPhoneNumber(phoneNumber) {
+    const numberRegex = /^[0-9]+$/;
+    return numberRegex.test(phoneNumber);
+}
+
+function isPhoneNumberDuplicate(phoneNumber) {
+    return clients.some(client => client.number === phoneNumber);
+}
