@@ -90,6 +90,16 @@ function addProduct(event) {
     const price = document.getElementById('price').value;
     const quantity = document.getElementById('quantity').value;
 
+    if (!isValidName(name)) {
+        alert("O nome não pode conter números ou símbolos.");
+        return;
+    }
+    if (!isValidName(description)) {
+        alert("A descrição não pode conter números ou símbolos.");
+        return;
+    }
+
+
     const product = { name, description, price, quantity };
 
     fetch(API_URL, {
@@ -205,4 +215,9 @@ document.getElementById('prevPage').addEventListener('click', () => {
         renderTable();
     }
 });
+
+function isValidName(name) {
+    const nameRegex = /^[a-zA-Z\s]+$/;
+    return nameRegex.test(name);
+}
 

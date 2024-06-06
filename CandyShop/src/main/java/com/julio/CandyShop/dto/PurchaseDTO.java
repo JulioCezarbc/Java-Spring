@@ -16,6 +16,7 @@ public class PurchaseDTO {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy-HH:mm", timezone = "UTC")
     private Instant date;
     private List<ProductDTO> products;
+    private List<String> productNames;
 
 
     public PurchaseDTO() {}
@@ -62,5 +63,12 @@ public class PurchaseDTO {
 
     public void setProducts(List<ProductDTO> products) {
         this.products = products;
+    }
+    public List<String> getProductNames() {
+        return productNames;
+    }
+
+    public void setProductNames(List<String> productNames) {
+        this.productNames = productNames;
     }
 }

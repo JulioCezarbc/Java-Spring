@@ -60,6 +60,12 @@ public class PurchaseService {
                 .collect(Collectors.toList());
 
         purchaseEntity.setProducts(products);
+
+        List<String> productNames = products.stream()
+                .map(ProductEntity::getName)
+                .collect(Collectors.toList());
+        purchaseEntity.setProductNames(productNames);
+
         purchaseEntity.setClient(client);
         purchaseEntity.setDate(purchaseDTO.getDate());
 
@@ -82,6 +88,13 @@ public class PurchaseService {
                 .collect(Collectors.toList());
 
         purchaseEntity.setProducts(products);
+
+        List<String> productNames = products.stream()
+                .map(ProductEntity::getName)
+                .collect(Collectors.toList());
+        purchaseEntity.setProductNames(productNames);
+
+
         purchaseEntity.setClient(client);
         purchaseEntity.setDate(purchaseDTO.getDate());
 

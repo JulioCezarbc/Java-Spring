@@ -34,18 +34,24 @@ public class PurchaseEntity {
     )
     private List<ProductEntity> products;
 
+    @ElementCollection
+    @CollectionTable(name = "purchase_product_names", joinColumns = @JoinColumn(name = "purchase_id"))
+    @Column(name = "product_name")
+    private List<String> productNames;
+
+
     public PurchaseEntity() {}
     public PurchaseEntity(PurchaseDTO purchaseDTO){
         BeanUtils.copyProperties(purchaseDTO, this);
     }
 
 
-    public PurchaseEntity(Long id, ClientEntity client, Instant date, List<ProductEntity> products) {
+    public PurchaseEntity(Long id, ClientEntity client, Instant date, List<ProductEntity> products,List<String> productNames) {
         this.id = id;
         this.client = client;
         this.date = date;
         this.products = products;
-
+        this.productNames = productNames;
     }
 
     public Long getId() {
@@ -77,6 +83,13 @@ public class PurchaseEntity {
 
     public void setProducts(List<ProductEntity> products) {
         this.products = products;
+    }
+    public List<String> getProductNames() {
+        return productNames;
+    }
+
+    public void setProductNames(List<String> productNames) {
+        this.productNames = productNames;
     }
 
     @Override

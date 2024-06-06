@@ -57,8 +57,9 @@ public class ClientService {
     }
     @Transactional
     public void delete (Long id){
-        ClientEntity client = clientRepository.findById(id).get();
-        clientRepository.delete(client);
+        ClientEntity product = clientRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("client with ID " + id + " not found"));
+        clientRepository.delete(product);
     }
 
 }
