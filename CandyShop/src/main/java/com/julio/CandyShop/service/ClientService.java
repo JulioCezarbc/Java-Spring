@@ -32,7 +32,7 @@ public class ClientService {
     public ClientDTO create (ClientDTO client){
 
         if (clientRepository.existsByNumber(client.getNumber())) {
-            throw new EntityExistsException("Número de telefone já existe.");
+            throw new EntityExistsException("Number already exists.");
         }
 
         ClientEntity clientEntity = new ClientEntity(client);
@@ -43,7 +43,7 @@ public class ClientService {
     public ClientDTO update(Long id,ClientDTO clientDTO){
 
         if (clientRepository.existsByNumber(clientDTO.getNumber())) {
-            throw new EntityExistsException("Número de telefone já existe.");
+            throw new EntityExistsException("Number already exists.");
         }
 
         ClientEntity client = clientRepository.findById(id)
@@ -57,9 +57,9 @@ public class ClientService {
     }
     @Transactional
     public void delete (Long id){
-        ClientEntity product = clientRepository.findById(id)
+        ClientEntity client = clientRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("client with ID " + id + " not found"));
-        clientRepository.delete(product);
+        clientRepository.delete(client);
     }
 
 }

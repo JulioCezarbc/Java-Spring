@@ -3,6 +3,7 @@ package com.julio.CandyShop.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.julio.CandyShop.dto.PurchaseDTO;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.beans.BeanUtils;
 
 import java.time.Instant;
@@ -24,6 +25,7 @@ public class PurchaseEntity {
 
     @JoinColumn(nullable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy-HH:mm", timezone = "UTC")
+    @CreationTimestamp
     private Instant date;
 
     @ManyToMany
