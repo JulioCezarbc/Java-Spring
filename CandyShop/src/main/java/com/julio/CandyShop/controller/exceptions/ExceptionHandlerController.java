@@ -1,8 +1,8 @@
 package com.julio.CandyShop.controller.exceptions;
 
 
+import com.julio.CandyShop.service.exceptions.EntityExistsException;
 import com.julio.CandyShop.service.exceptions.EntityNotFoundException;
-import jakarta.persistence.EntityExistsException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;

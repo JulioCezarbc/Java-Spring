@@ -1,9 +1,11 @@
 package com.julio.CandyShop.entity;
 
+import com.julio.CandyShop.dto.LoginRequest;
 import com.julio.CandyShop.dto.UserDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import org.springframework.beans.BeanUtils;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Set;
 import java.util.UUID;
@@ -18,9 +20,6 @@ public class UserEntity {
     @Column(unique = true, nullable = false)
     private String username;
     private String password;
-    @Email
-    @Column(unique = true, nullable = false)
-    private String email;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "tb_users_roles",
@@ -58,15 +57,6 @@ public class UserEntity {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public @Email String getEmail() {
-        return email;
-    }
-
-    public void setEmail(@Email String email) {
-        this.email = email;
-    }
-
     public Set<RoleEntity> getRoles() {
         return roles;
     }
@@ -75,7 +65,7 @@ public class UserEntity {
         this.roles = roles;
     }
 
-//    public boolean isLoginCorrect(LoginRequest loginRequest, PasswordEncoder passwordEncoder) {
-//        return passwordEncoder.matches(loginRequest.password(), this.password);
-//    }
+    public boolean isLoginCorrect(LoginRequest loginRequest, PasswordEncoder passwordEncoder) {
+        return passwordEncoder.matches(loginRequest.password(), this.password);
+    }
 }

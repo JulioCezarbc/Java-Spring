@@ -4,6 +4,9 @@ let currentPage = 1;
 let products = [];
 let idToUpdate = null;
 
+// Recupera o token de autenticação do localStorage
+const authToken = localStorage.getItem('authToken');
+
 document.getElementById('product-form').addEventListener('submit', addProduct);
 document.getElementById('deleteSelected').addEventListener('click', deleteSelectedProducts);
 document.getElementById('selectAllCheckbox').addEventListener('click', toggleSelectAll);
@@ -39,7 +42,7 @@ function renderTable() {
 
     paginatedProducts.forEach(product => {
         const row = document.createElement('tr');
-        const totalPrice = product.price * product.quantity; // Calcula o preço total
+        const totalPrice = product.price * product.quantity; 
         row.innerHTML = `
             <td><input type="checkbox" class="delete-checkbox" data-id="${product.id}"></td>
             <td>${product.name}</td>
@@ -64,22 +67,27 @@ function renderTable() {
     document.getElementById('pageNumber').textContent = currentPage;
 }
 
-
 function loadProducts() {
-    fetch(API_URL)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Erro na resposta da rede.');
-            }
-            return response.json();
-        })
-        .then(data => {
-            products = data;
-            renderTable();
-        })
-        .catch(error => {
-            console.error('Erro ao carregar produtos: ', error);
-        });
+    fetch(API_URL, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${authToken}`, // Incluir o token de autenticação no cabeçalho Authorization
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erro na resposta da rede.');
+        }
+        return response.json();
+    })
+    .then(data => {
+        products = data;
+        renderTable();
+    })
+    .catch(error => {
+        console.error('Erro ao carregar produtos:', error);
+    });
 }
 
 function addProduct(event) {
@@ -99,12 +107,14 @@ function addProduct(event) {
         return;
     }
 
-
     const product = { name, description, price, quantity };
 
     fetch(API_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authToken}` // Incluir o token de autenticação no cabeçalho Authorization
+        },
         body: JSON.stringify(product)
     })
     .then(response => {
@@ -127,7 +137,10 @@ function deleteSelectedProducts() {
 
     idsToDelete.forEach(id => {
         fetch(`${API_URL}/${id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${authToken}` // Incluir o token de autenticação no cabeçalho Authorization
+            }
         })
         .then(response => {
             if (!response.ok) {
@@ -156,10 +169,6 @@ function openUpdateModal(product) {
     const modal = document.getElementById('updateModal');
     modal.style.display = 'block';
     document.getElementById('update-form').reset();
-
-
-
-
     idToUpdate = product.id;
 }
 
@@ -171,7 +180,6 @@ function closeUpdateModal() {
 function updateSelectedProduct(event) {
     event.preventDefault();
     
-
     if (!idToUpdate) return;
 
     const name = document.getElementById('update-name').value;
@@ -179,12 +187,14 @@ function updateSelectedProduct(event) {
     const quantity = document.getElementById('update-quantity').value;
     const price = document.getElementById('update-price').value;
 
-
     const updatedProduct = { name, description, price, quantity };
 
     fetch(`${API_URL}/${idToUpdate}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authToken}` // Incluir o token de autenticação no cabeçalho Authorization
+        },
         body: JSON.stringify(updatedProduct)
     })
     .then(response => {
@@ -220,4 +230,3 @@ function isValidName(name) {
     const nameRegex = /^[a-zA-Z\s]+$/;
     return nameRegex.test(name);
 }
-

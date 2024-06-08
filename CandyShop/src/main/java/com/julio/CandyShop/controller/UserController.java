@@ -10,6 +10,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @CrossOrigin
@@ -29,10 +30,10 @@ public class UserController {
         user = userService.create(user);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId())
                 .toUri();
-        return ResponseEntity.created(uri).body(user);
+        return ResponseEntity.created(uri).build();
     }
     @PutMapping(value = "/{id}")
-    public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody UserDTO user){
+    public ResponseEntity<UserDTO> update(@PathVariable UUID id, @RequestBody UserDTO user){
         user = userService.update(id,user);
         return ResponseEntity.ok().body(user);
     }
