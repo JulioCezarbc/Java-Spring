@@ -5,16 +5,30 @@ const rowsPerPage = 5;
 let currentPage = 1;
 let clients = [];
 
+// Recupera o token de autenticação do localStorage
+const authToken = localStorage.getItem('accessToken');
+
 document.addEventListener('DOMContentLoaded', loadClients);
 
 function loadClients() {
-    fetch(API_URL)
-        .then(response => response.json())
-        .then(data => {
-            clients = data;
-            renderTable();
-        })
-        .catch(error => console.error('Erro ao carregar clientes:', error));
+    fetch(API_URL, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${authToken}`, // Incluir o token de autenticação no cabeçalho Authorization
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erro na resposta da rede.');
+        }
+        return response.json();
+    })
+    .then(data => {
+        clients = data;
+        renderTable();
+    })
+    .catch(error => console.error('Erro ao carregar clientes:', error));
 }
 
 function renderTable() {
@@ -36,8 +50,6 @@ function renderTable() {
         purchaseRow.classList.add('purchase-row');
         purchaseRow.id = `purchases-${client.id}`;
 
-        // <th>Quantidade</th>
-        // <th>Preço Total</th>
         purchaseRow.innerHTML = `
             <td colspan="2">
                 <table class="purchase-table">
@@ -45,7 +57,6 @@ function renderTable() {
                         <tr>
                             <th>Produto</th>
                             <th>Data</th>
-                           
                         </tr>
                     </thead>
                     <tbody></tbody>
@@ -81,35 +92,39 @@ function togglePurchases(event) {
 }
 
 function loadPurchases(clientId) {
-    // <td>${product.quantity}</td>
-    // <td>${formatCurrency(product.price * product.quantity)}</td>
-    fetch(`${APIURL}/client/${clientId}`)
-        .then(response => response.json())
-        .then(data => {
-            const purchaseTableBody = document.querySelector(`#purchases-${clientId} .purchase-table tbody`);
-            purchaseTableBody.innerHTML = '';
-            data.forEach(purchase => {
-                purchase.products.forEach(product => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${product.name || 'Não especificado'}</td>
-                        <td>${formatDate(purchase.date)}</td>
-                        
-                    `;
-                    purchaseTableBody.appendChild(row);
-                });
+    fetch(`${APIURL}/client/${clientId}`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${authToken}`, // Incluir o token de autenticação no cabeçalho Authorization
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erro na resposta da rede.');
+        }
+        return response.json();
+    })
+    .then(data => {
+        const purchaseTableBody = document.querySelector(`#purchases-${clientId} .purchase-table tbody`);
+        purchaseTableBody.innerHTML = '';
+        data.forEach(purchase => {
+            purchase.products.forEach(product => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${product.name || 'Não especificado'}</td>
+                    <td>${formatDate(purchase.date)}</td>
+                `;
+                purchaseTableBody.appendChild(row);
             });
-        })
-        .catch(error => console.error('Erro ao carregar compras:', error));
+        });
+    })
+    .catch(error => console.error('Erro ao carregar compras:', error));
 }
 
 function formatDate(dateString) {
     const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' };
     return new Date(dateString).toLocaleDateString('pt-BR', options);
-}
-
-function formatCurrency(amount) {
-    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(amount);
 }
 
 document.getElementById('nextPage').addEventListener('click', () => {

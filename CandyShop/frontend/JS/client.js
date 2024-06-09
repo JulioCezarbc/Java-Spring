@@ -4,6 +4,9 @@ let currentPage = 1;
 let clients = [];
 let idToUpdate = null;
 
+// Recupera o token de autenticação do localStorage
+const authToken = localStorage.getItem('accessToken');
+
 document.getElementById('client-form').addEventListener('submit', addClient);
 document.getElementById('deleteSelected').addEventListener('click', deleteSelectedClients);
 document.getElementById('selectAllCheckbox').addEventListener('click', toggleSelectAll);
@@ -58,7 +61,13 @@ function renderTable(){
 }
 
 function loadClients(){
-    fetch(API_URL)
+    fetch(API_URL, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${authToken}`, // Incluir o token de autenticação no cabeçalho Authorization
+            'Content-Type': 'application/json'
+        }
+    })
     .then(response => {
         if(!response.ok){
             throw new Error('Erro na resposta da rede');
@@ -96,7 +105,10 @@ function addClient(event){
 
     fetch(API_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Authorization': `Bearer ${authToken}`, // Incluir o token de autenticação no cabeçalho Authorization
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify(client)
     })
     .then(response => {
@@ -119,7 +131,11 @@ function deleteSelectedClients(){
 
     idsToDelete.forEach(id => {
         fetch(`${API_URL}/${id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${authToken}`, // Incluir o token de autenticação no cabeçalho Authorization
+                'Content-Type': 'application/json'
+            }
         })
         .then(response => {
             if(!response.ok){
@@ -162,7 +178,10 @@ function updateSelectedClient(event){
 
     fetch(`${API_URL}/${idToUpdate}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Authorization': `Bearer ${authToken}`, // Incluir o token de autenticação no cabeçalho Authorization
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify(updatedClient)
     })
     .then(response => {

@@ -5,7 +5,7 @@ let products = [];
 let idToUpdate = null;
 
 // Recupera o token de autenticação do localStorage
-const authToken = localStorage.getItem('authToken');
+const accessToken = localStorage.getItem('accessToken');
 
 document.getElementById('product-form').addEventListener('submit', addProduct);
 document.getElementById('deleteSelected').addEventListener('click', deleteSelectedProducts);
@@ -71,7 +71,7 @@ function loadProducts() {
     fetch(API_URL, {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${authToken}`, // Incluir o token de autenticação no cabeçalho Authorization
+            'Authorization': `Bearer ${accessToken}`, // Incluir o token de autenticação no cabeçalho Authorization
             'Content-Type': 'application/json'
         }
     })
@@ -113,7 +113,7 @@ function addProduct(event) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${authToken}` // Incluir o token de autenticação no cabeçalho Authorization
+            'Authorization': `Bearer ${accessToken}` // Incluir o token de autenticação no cabeçalho Authorization
         },
         body: JSON.stringify(product)
     })
@@ -139,7 +139,7 @@ function deleteSelectedProducts() {
         fetch(`${API_URL}/${id}`, {
             method: 'DELETE',
             headers: {
-                'Authorization': `Bearer ${authToken}` // Incluir o token de autenticação no cabeçalho Authorization
+                'Authorization': `Bearer ${accessToken}` // Incluir o token de autenticação no cabeçalho Authorization
             }
         })
         .then(response => {
@@ -193,7 +193,7 @@ function updateSelectedProduct(event) {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${authToken}` // Incluir o token de autenticação no cabeçalho Authorization
+            'Authorization': `Bearer ${accessToken}` // Incluir o token de autenticação no cabeçalho Authorization
         },
         body: JSON.stringify(updatedProduct)
     })
@@ -211,6 +211,7 @@ function updateSelectedProduct(event) {
     })
     .catch(error => console.error('Erro ao atualizar produto: ', error));
 }
+
 
 document.getElementById('nextPage').addEventListener('click', () => {
     if ((currentPage - 1) * rowsPerPage + rowsPerPage < products.length) {

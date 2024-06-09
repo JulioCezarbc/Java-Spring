@@ -1,5 +1,4 @@
 const LOGIN_API_URL = 'http://localhost:8080/login';
-let authToken = null;
 
 function login(event) {
     event.preventDefault();
@@ -27,9 +26,16 @@ function login(event) {
     })
     .then(data => {
         console.log('Login bem-sucedido:', data);
-        alert('Login bem-sucedido!');
-        authToken = data.token;
-        localStorage.setItem('authToken', authToken);  // Armazena o token no localStorage
+        
+        // Verifica se a resposta contém o token
+        if (!data.accessToken) {
+            throw new Error('Token não encontrado na resposta.');
+        }
+
+        // Armazena o token no localStorage
+        localStorage.setItem('accessToken', data.accessToken);
+
+        // Redireciona para a página principal
         window.location.href = '/HTML/index.html';
     })
     .catch(error => {
