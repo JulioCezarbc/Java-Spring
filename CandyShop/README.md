@@ -7,7 +7,7 @@ Ele é dividido em duas partes principais: o backend, que fornece a API REST, e 
 ## O sistema cria um usuário admin padrão na primeira execução, com as credenciais:
 
 Username: admin
-Password: 123g
+Password: 123
 
 ## Tecnologias Utilizadas:
 
