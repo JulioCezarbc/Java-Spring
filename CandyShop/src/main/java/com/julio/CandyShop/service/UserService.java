@@ -75,6 +75,7 @@ public class UserService {
         }
 
         UserEntity userEntity = new UserEntity();
+        userEntity.setId(userDTO.getId());
         userEntity.setUsername(userDTO.getUsername());
         userEntity.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
         userEntity.setRoles(Set.of(basicRole));
