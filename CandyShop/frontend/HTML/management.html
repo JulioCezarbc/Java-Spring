@@ -19,9 +19,8 @@
         </nav>
     </header>
 
-
     <main>
-        <div >
+        <div>
             <h1>Produtos</h1>
             <table id="product-table">
                 <thead>
@@ -32,12 +31,9 @@
                         <th>Quantidade</th>
                         <th>Preço</th>
                         <th>Preço Total</th>
-
-
                     </tr>
                 </thead>
                 <tbody>
-                    
                 </tbody>
             </table>
             <button id="atualizationSelected">Atualizar</button>
@@ -50,23 +46,16 @@
             </div>
         </div>
 
-
-
-
         <div>
             <h2>Adicionar Produto</h2>
             <form id="product-form">
                 <input type="text" id="name" placeholder="Nome do Produto" required>
                 <input type="text" id="description" placeholder="Descrição" required>
                 <input type="number" id="quantity" placeholder="Quantidade" required>
-                <input type="number" id="price" placeholder="Preço" required>
-
+                <input type="number" id="price" placeholder="Preço" step="0.01" required>
                 <button type="submit">Adicionar Produto</button>
-
             </form>
         </div>
-
-
 
         <div id="updateModal" class="modal">
             <div class="modal-content">
@@ -76,7 +65,7 @@
                     <input type="text" id="update-name" placeholder="Novo Nome do Produto" required>
                     <input type="text" id="update-description" placeholder="Nova Descrição" required>
                     <input type="number" id="update-quantity" placeholder="Nova Quantidade" required>
-                    <input type="number" id="update-price" placeholder="Novo Preço" required>
+                    <input type="number" id="update-price" placeholder="Novo Preço" step="0.01" required>
                     <button type="submit">Atualizar</button>
                 </form>
             </div>

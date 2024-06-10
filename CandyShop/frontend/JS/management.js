@@ -4,7 +4,6 @@ let currentPage = 1;
 let products = [];
 let idToUpdate = null;
 
-// Recupera o token de autenticação do localStorage
 const accessToken = localStorage.getItem('accessToken');
 
 document.getElementById('product-form').addEventListener('submit', addProduct);
@@ -71,7 +70,7 @@ function loadProducts() {
     fetch(API_URL, {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${accessToken}`, // Incluir o token de autenticação no cabeçalho Authorization
+            'Authorization': `Bearer ${accessToken}`,
             'Content-Type': 'application/json'
         }
     })
@@ -102,10 +101,6 @@ function addProduct(event) {
         alert("O nome não pode conter números ou símbolos.");
         return;
     }
-    if (!isValidName(description)) {
-        alert("A descrição não pode conter números ou símbolos.");
-        return;
-    }
 
     const product = { name, description, price, quantity };
 
@@ -113,7 +108,7 @@ function addProduct(event) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}` // Incluir o token de autenticação no cabeçalho Authorization
+            'Authorization': `Bearer ${accessToken}`
         },
         body: JSON.stringify(product)
     })
@@ -139,7 +134,7 @@ function deleteSelectedProducts() {
         fetch(`${API_URL}/${id}`, {
             method: 'DELETE',
             headers: {
-                'Authorization': `Bearer ${accessToken}` // Incluir o token de autenticação no cabeçalho Authorization
+                'Authorization': `Bearer ${accessToken}`
             }
         })
         .then(response => {
@@ -193,7 +188,7 @@ function updateSelectedProduct(event) {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}` // Incluir o token de autenticação no cabeçalho Authorization
+            'Authorization': `Bearer ${accessToken}`
         },
         body: JSON.stringify(updatedProduct)
     })

@@ -34,15 +34,13 @@ public class SecurityConfig {
     @Value("${jwt.private.key}")
     private RSAPrivateKey privateKey;
 
-
-    //.anyRequest().authenticated())//Todas requisoes tem que ser autenticadas
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.authorizeRequests(authorize ->
-                authorize.requestMatchers(HttpMethod.POST,"/login").permitAll()
-                        .requestMatchers("/user").permitAll()
-                        .anyRequest().authenticated())
+                        authorize.requestMatchers(HttpMethod.POST, "/login", "/token/refresh").permitAll()
+                                .requestMatchers("/user").permitAll()
+                                .anyRequest().authenticated())
                 .csrf(csrf -> csrf.disable())
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
