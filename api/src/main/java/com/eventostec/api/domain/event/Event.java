@@ -18,8 +18,7 @@ import java.util.UUID;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class event {
-
+public class Event {
     @Id
     @GeneratedValue
     private UUID id;
