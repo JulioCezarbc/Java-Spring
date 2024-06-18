@@ -22,9 +22,9 @@ public class Event {
     @Id
     @GeneratedValue
     private UUID id;
-
     private String title;
     private String description;
+    private String imgUrl;
     private String eventUrl;
     private boolean remote;
     private Date date;
