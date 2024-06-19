@@ -57,7 +57,7 @@ public class EventService {
                 return s3Client.getUrl(bucketName, fileName).toString();
 
             }catch (Exception e) {
-                System.out.println("ERROR UPLOADING IMAGE");
+                System.out.println("ERROR UPLOADING IMAGE" + e.getMessage());
                 return "";
             }
     }
