@@ -33,6 +33,9 @@ public class EventService {
     @Autowired
     private EventRepository eventRepository;
 
+    @Autowired
+    private AddressService addressService;
+
     public Event createEvent(EventRequestDTO data) {
         String imgUrl = null;
         if (data.image() != null){
@@ -47,6 +50,10 @@ public class EventService {
         event.setRemote(data.remote());
 
         eventRepository.save(event);
+
+        if (!data.remote()){
+            this.addressService.createAddress(data, event);
+        }
         return event;
     }
 
