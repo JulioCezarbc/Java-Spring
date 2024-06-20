@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="script.js"></script>
+    <title>Oak</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html"><strong>Gerenciamento De Produtos</strong></a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Produtos</h1>
+            <table id="product-table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Preço
+                            <button id="sortAsc">↓</button>
+                            <button id="sortDesc">↑</button>
+                        </th>
+                        <th>Disponibilidade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <button id="prevPage" disabled>Anterior</button>
+                <span id="pageNumber">1</span>
+                <button id="nextPage">Próximo</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <h2>Adicionar Produto</h2>
+            <form id="product-form">
+                <input type="text" id="name" placeholder="Nome do Produto" required>
+                <input type="text" id="description" placeholder="Descrição" required>
+                <input type="number" id="value" placeholder="Preço" step="0.01" required>
+                <select id="availability" required>
+                    <option value="true">Sim</option>
+                    <option value="false">Não</option>
+                </select>
+                <button type="submit">Adicionar Produto</button>
+            </form>
+            
+        </div>
+    </main>
+</body>
+</html>
