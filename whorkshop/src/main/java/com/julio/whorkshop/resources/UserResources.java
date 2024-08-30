@@ -1,6 +1,6 @@
 package com.julio.whorkshop.resources;
 
-import com.julio.whorkshop.domain.User;
+import com.julio.whorkshop.DTO.UserDTO;
 import com.julio.whorkshop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ public class UserResources {
     private UserService service;
 
     @GetMapping
-    public ResponseEntity<List<User>> findAll(){
+    public ResponseEntity<List<UserDTO>> findAll(){
         return ResponseEntity.ok().body(service.findAll());
     }
 
