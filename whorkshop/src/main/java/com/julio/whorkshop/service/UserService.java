@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -24,5 +23,13 @@ public class UserService {
         User user = repository.findById(id).orElseThrow(() -> new ObjectNotFoundException("User not found"));
         return new UserDTO(user.getId(),user.getName(),user.getEmail());
     }
+    public UserDTO insertUser(UserDTO data){
+        User user = fromDTO(data);
+        repository.save(user);
+        return data;
+    }
 
+    public User fromDTO(UserDTO data){
+        return new User(data.id(),data.name(),data.email());
+    }
 }
