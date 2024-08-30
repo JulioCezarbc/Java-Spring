@@ -21,8 +21,7 @@ public class UserService {
         return list.stream().map(user -> new UserDTO(user.getId(), user.getName(), user.getEmail())).toList();
     }
     public User findById(String id){
-        User user = repository.findById(id).orElseThrow(() -> new ObjectNotFoundException("User not found"));
-        return user;
+        return repository.findById(id).orElseThrow(() -> new ObjectNotFoundException("User not found"));
     }
     public void insertUser(UserDTO data){
         User user = fromDTO(data);
