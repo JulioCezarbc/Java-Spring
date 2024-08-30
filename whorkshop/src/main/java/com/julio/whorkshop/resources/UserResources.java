@@ -3,6 +3,7 @@ package com.julio.whorkshop.resources;
 import com.julio.whorkshop.DTO.UserDTO;
 import com.julio.whorkshop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -30,6 +31,11 @@ public class UserResources {
         service.insertUser(data);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(data.id()).toUri();
         return ResponseEntity.created(uri).build();
+    }
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Void> updateUser(@PathVariable String id, @RequestBody UserDTO data){
+        service.updateUser(id,data);
+        return ResponseEntity.noContent().build();
     }
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable String id){
