@@ -1,6 +1,8 @@
 package com.julio.whorkshop.resources;
 
 import com.julio.whorkshop.DTO.UserDTO;
+import com.julio.whorkshop.domain.Post;
+import com.julio.whorkshop.domain.User;
 import com.julio.whorkshop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +24,14 @@ public class UserResources {
         return ResponseEntity.ok().body(service.findAll());
     }
     @GetMapping(value = "/{id}")
-    public ResponseEntity<UserDTO> findById(@PathVariable String id){
+    public ResponseEntity<User> findById(@PathVariable String id){
         return ResponseEntity.ok().body(service.findById(id));
+    }
+    @GetMapping(value = "/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id){
+        User data = service.findById(id);
+
+        return ResponseEntity.ok().body(data.getPosts());
     }
     @PostMapping
     public ResponseEntity<Void> insertUser(@RequestBody UserDTO data){
