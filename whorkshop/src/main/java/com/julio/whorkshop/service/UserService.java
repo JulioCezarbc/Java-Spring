@@ -23,10 +23,13 @@ public class UserService {
         User user = repository.findById(id).orElseThrow(() -> new ObjectNotFoundException("User not found"));
         return new UserDTO(user.getId(),user.getName(),user.getEmail());
     }
-    public UserDTO insertUser(UserDTO data){
+    public void insertUser(UserDTO data){
         User user = fromDTO(data);
         repository.save(user);
-        return data;
+    }
+    public void deleteUser(String id){
+        User user = repository.findById(id).orElseThrow(() -> new ObjectNotFoundException("User not found"));
+        repository.delete(user);
     }
 
     public User fromDTO(UserDTO data){
