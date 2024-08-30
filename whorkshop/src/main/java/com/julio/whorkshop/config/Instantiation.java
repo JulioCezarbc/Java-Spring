@@ -1,6 +1,7 @@
 package com.julio.whorkshop.config;
 
 import com.julio.whorkshop.DTO.AuthorDTO;
+import com.julio.whorkshop.DTO.CommentDto;
 import com.julio.whorkshop.domain.Post;
 import com.julio.whorkshop.domain.User;
 import com.julio.whorkshop.repository.PostRepository;
@@ -34,6 +35,15 @@ public class Instantiation implements CommandLineRunner {
 
         Post p1 = new Post(null, sdf.parse("30/08/2024"),"Partiu viagem!","Indo para o interior", new AuthorDTO(jay.getId(), jay.getName()));
         Post p2 = new Post(null, sdf.parse("03/09/2024"),"Bom dia!","Acordei pampa hoje", new AuthorDTO(jay.getId(),jay.getName()));
+
+        CommentDto c1 = new CommentDto("Boa viagem!", sdf.parse("30/08/2024"), new AuthorDTO(juy.getId(), juy.getName()));
+        CommentDto c2 = new CommentDto("Boa Companheiro!", sdf.parse("30/08/2024"), new AuthorDTO(bob.getId(), bob.getName()));
+        CommentDto c3 = new CommentDto("Boa dia!", sdf.parse("03/09/2024"), new AuthorDTO(bob.getId(), bob.getName()));
+
+        p1.getComments().addAll(Arrays.asList(c1,c2));
+        p2.getComments().add(c3);
+
+
 
 
         postRepository.saveAll(Arrays.asList(p1,p2));
